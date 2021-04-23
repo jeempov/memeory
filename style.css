@@ -3,3 +3,16 @@
     height: 100vh;
     width: 100vw;
 }
+​
+.card {
+  cursor: pointer;
+  height: 10em;
+  width: 6em;
+  overflow: hidden;
+}
+​
+.card img {
+  display: block;
+  width: 300%;
+  margin-left: -100%;
+}
