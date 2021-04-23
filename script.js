@@ -6,7 +6,7 @@ const CARDS = [
   {
       value: 'butterfly',
       img: 'butterflymem.jpg'
-  }
+  },
 
   {
       value: 'penguin',
@@ -45,7 +45,7 @@ const CARDS = [
       img: 'mrpbshot.jpeg'
   },
 
-];
+]; 
 
 function Card (value, isFlipped, img) {
     this.value = value;
@@ -57,7 +57,7 @@ function Card (value, isFlipped, img) {
 Card.prototype.html = function() {
 	return `<div class="card"><img src="${ this.img }" data-id="${ this.id }"></div>`;
 }
-​
+
 Card.prototype.backHtml = function() {
 	return `<div class="card"><img src="https://images-na.ssl-images-amazon.com/images/I/61AGZ37D7eL._AC_SL1039_.jpg" data-id="${ this.id }"></div>`;
 }
@@ -69,6 +69,10 @@ function Deck (cards) {
     }
 }
 ​
+Deck.prototype.add = function (aCard) {
+    this.cards.push(aCard);
+}
+
 Deck.prototype.draw = function () {
   document.querySelector('#board').innerHTML = '';
 	for (let i = 0; i < this.cards.length; i++) {
@@ -89,15 +93,19 @@ document.querySelector('#board').addEventListener('click', function (event) {
   deck.cards[cardId].isFlipped = !deck.cards[cardId].isFlipped;
   deck.draw();
 });
+
 ​
-let cards = [];
-​
-const rickmortycard = new Card('mrpb', false, 'https://i.stack.imgur.com/VFpyU.png');
-cards.push(rickmortycard);
-​
-const deck = new Deck(cards);
-​
-deck.draw();
+const myDeck = new Deck();
+​for (let i = 0; i <= CARDS.length; i++) {
+  myDeck.add(CARDS[i])
+}
+
+
+
+
+
+//deck.add(something);
+myDeck.draw();
 ​
 //https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/conditionals
 //switch () {
