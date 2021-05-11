@@ -58,9 +58,12 @@ function Card (value, isFlipped, img) {
     this.isFlipped = isFlipped;
     this.img = img;
     this.id = -1;
-}Card.prototype.html = function() {
-	return `<div class="card"><img src="${ this.img }" data-id="${ this.id }"></div>`;
 }
+
+Card.prototype.html = function() {
+	return `<div class="card" style="background-image: url('${ this.img }')" data-id="${ this.id }"> </div>`;
+}
+
 
 Card.prototype.backHtml = function() {
 	return `<div class="card"><img src="magic.jpg" data-id="${ this.id }"></div>`;
@@ -105,15 +108,32 @@ Deck.prototype.draw = function () { //draws stuff onto screen
     } else {
     	html = card.backHtml();
     }
-    let element = 
+    //let element = 
     document.querySelector('#board').innerHTML += html;
   }
 };
+
+
+
 document.querySelector('#board').addEventListener('click', function (event) {
 	let cardId = event.target.dataset.id;
-  myDeck.cards[cardId].isFlipped = !myDeck.cards[cardId].isFlipped;
+    console.log(cardId);
+  if (cardId) {      
+    let cardToFlip = myDeck.cards.find(function(aCard) {
+        console.log(aCard);
+    return aCard.id == cardId;
+    console.log(cardId);
+    } );
+    console.log(cardToFlip);
+    cardToFlip.isFlipped = !cardToFlip.isFlipped;
+  }
+
+  
+  console.log(cardId);
   myDeck.draw();
-});
+  
+  });
+
 
 const myDeck = new Deck();
 for (let i = 0; i < CARDS.length; i++) {
